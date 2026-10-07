@@ -46,19 +46,22 @@ final routerProvider = Provider<GoRouter>((ref) {
     errorBuilder: (context, state) => Scaffold(
       appBar: AppBar(title: const Text('Page Not Found')),
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.error_outline_rounded, size: 60, color: Colors.red),
-            const SizedBox(height: 16),
-            Text('Invalid Route: ${state.uri}',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            AppButton(
-              text: 'Go to Dashboard',
-              onPressed: () => context.go('/dashboard'),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.error_outline_rounded, size: 60, color: Colors.red),
+              const SizedBox(height: 16),
+              Text('Page Not Found: ${state.uri}',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 16),
+              AppButton(
+                text: storage.hasAuthTokenSync() ? 'Go to Dashboard' : 'Go to Login',
+                onPressed: () => context.go(storage.hasAuthTokenSync() ? '/dashboard' : '/login'),
+              ),
+            ],
+          ),
         ),
       ),
     ),
@@ -67,34 +70,37 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isOnboarded = storage.isOnboardingComplete();
       final hasToken = storage.hasAuthTokenSync();
 
-      // Allow splash freely
+      // 1. Splash is always allowed
       if (path == AppRouteNames.splash) return null;
 
-      // If not onboarded and not on onboarding, redirect
-      if (!isOnboarded && path != AppRouteNames.onboarding) {
-        return AppRouteNames.onboarding;
+      // 2. If onboarding is not completed yet:
+      if (!isOnboarded) {
+        return path == AppRouteNames.onboarding ? null : AppRouteNames.onboarding;
       }
 
-      // If onboarded and trying to go back to onboarding, skip to login/dashboard
-      if (isOnboarded && path == AppRouteNames.onboarding) {
+      // 3. If onboarding is already completed and user tries to access onboarding again:
+      if (path == AppRouteNames.onboarding) {
         return hasToken ? AppRouteNames.dashboard : AppRouteNames.login;
       }
 
-      // Auth routes allowed without token
+      // 4. Auth routes: login, register, forgotPassword, otpVerification, resetPassword
       final isAuthRoute = path == AppRouteNames.login ||
           path == AppRouteNames.register ||
           path == AppRouteNames.forgotPassword ||
           path == AppRouteNames.otpVerification ||
           path == AppRouteNames.resetPassword;
 
-      if (!hasToken && !isAuthRoute) {
-        return AppRouteNames.login;
-      }
-
+      // If already logged in, redirect away from auth routes to dashboard
       if (hasToken && isAuthRoute) {
         return AppRouteNames.dashboard;
       }
 
+      // If NOT logged in and trying to access protected routes, redirect to login
+      if (!hasToken && !isAuthRoute) {
+        return AppRouteNames.login;
+      }
+
+      // Otherwise allow current route
       return null;
     },
     routes: [
