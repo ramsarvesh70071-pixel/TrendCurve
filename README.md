@@ -9,6 +9,8 @@
 
 **Trend Curve** allows creators, founders, professionals, students, and teams to create metrics and monitor numerical progress over time. Whether tracking monthly business revenue, expenses, website traffic, fitness goals, or study hours, Trend Curve computes momentum vectors, percentage growth, and visual trend curves.
 
+📖 **[Full In-Depth User Guide & Feature Manual (Hinglish)](USER_GUIDE.md)** — Check this comprehensive guide explaining every screen, button, and feature step-by-step!
+
 ---
 
 ## ✨ Features
