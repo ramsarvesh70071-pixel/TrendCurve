@@ -8,22 +8,95 @@
 ## 📑 Index (Anukramanika)
 
 1. [App Ka Main Maqsad (Purpose)](#1-app-ka-main-maqsad-purpose)
-2. [Splash & Onboarding Screens](#2-splash--onboarding-screens)
-3. [Authentication (Login, Register & Password Reset)](#3-authentication-login-register--password-reset)
-4. [Dashboard (Home Screen)](#4-dashboard-home-screen)
-5. [Trends Management (Search, Filter, Sort & Cards)](#5-trends-management-search-filter-sort--cards)
-6. [Naya Trend Create Karna (Create Trend Screen)](#6-naya-trend-create-karna-create-trend-screen)
-7. [Trend Details & Analytics Screen](#7-trend-details--analytics-screen)
-8. [Data Points Add, Edit & Delete Karna](#8-data-points-add-edit--delete-karna)
-9. [Dedicated Analytics & Multi-Trend Comparison](#9-dedicated-analytics--multi-trend-comparison)
-10. [Activity Timeline Log](#10-activity-timeline-log)
-11. [Notifications Center](#11-notifications-center)
-12. [Global Search Feature](#12-global-search-feature)
-13. [Profile & User Settings](#13-profile--user-settings)
-14. [Theme & Appearance (Dark Mode)](#14-theme--appearance-dark-mode)
-15. [Data Sovereignty (Backup Export & Import)](#15-data-sovereignty-backup-export--import)
-16. [Security & Biometrics](#16-security--biometrics)
-17. [Help, Support & FAQs](#17-help-support--faqs)
+2. [PDF to Trend Curve & Excel Analyzer (Master Feature)](#2-pdf-to-trend-curve--excel-analyzer-master-feature)
+3. [Splash & Onboarding Screens](#3-splash--onboarding-screens)
+4. [Authentication (Login, Register & Password Reset)](#4-authentication-login-register--password-reset)
+5. [Dashboard (Home Screen)](#5-dashboard-home-screen)
+6. [Trends Management (Search, Filter, Sort & Cards)](#6-trends-management-search-filter-sort--cards)
+7. [Naya Trend Create Karna (Create Trend Screen)](#7-naya-trend-create-karna-create-trend-screen)
+8. [Trend Details & Analytics Screen](#8-trend-details--analytics-screen)
+9. [Data Points Add, Edit & Delete Karna](#9-data-points-add-edit--delete-karna)
+10. [Dedicated Analytics & Multi-Trend Comparison](#10-dedicated-analytics--multi-trend-comparison)
+11. [Activity Timeline Log](#11-activity-timeline-log)
+12. [Notifications Center](#12-notifications-center)
+13. [Global Search Feature](#13-global-search-feature)
+14. [Profile & User Settings](#14-profile--user-settings)
+15. [Theme & Appearance (Dark Mode)](#15-theme--appearance-dark-mode)
+16. [Data Sovereignty (Backup Export & Import)](#16-data-sovereignty-backup-export--import)
+17. [Security & Biometrics](#17-security--biometrics)
+18. [Help, Support & FAQs](#18-help-support--faqs)
+
+---
+
+## 2. PDF to Trend Curve & Excel Analyzer (Master Feature)
+
+Trend Curve app me ab ek powerful **PDF Data Analyzer Engine** integrated hai jo kisi bhi PDF table se numbers aur dates extract karta hai, trend curves banata hai, aur automatically 4-sheet Excel (.xlsx) file create karke share karta hai.
+
+### Navigation:
+* **Bottom Navigation Bar:** Screen ke bottom me **"PDF Analyzer"** tab par tap karein.
+* **Dashboard Banner:** Home dashboard ke top par **"Open PDF Analyzer"** button par tap karein.
+
+### 5-Step Workflow:
+
+#### Step 1: PDF Upload & Parsing
+1. **Browse Device Storage:** Button dabakar apne phone ke internal storage ya downloads folder se koi bhi PDF select karein jisme tabular data ho.
+2. **File Validation:** App check karta hai ki file valid PDF hai ya nahi. Empty ya corrupted PDF hone par turant clear warning aati hai.
+3. **1-Tap Test Samples:** Agar aapke phone me turant koi tabular PDF available nahi hai, toh app me 2 ready-to-use sample datasets diye gaye hain:
+   * **Sensor Telemetry:** Temperature, Pressure, aur Voltage ke sensor logs.
+   * **Financial Metrics:** Monthly Revenue, Operating Margin, aur Units Sold ka financial performance table.
+   In buttons ko dabate hi instantly PDF data parse ho jayega!
+4. **Multiple Tables Detection:** Agar ek PDF file me 1 se zyada tables milti hain, toh dropdown se aap easily choose kar sakte hain ki kaunsi table analyze karni hai.
+
+#### Step 2: Review Extracted Variables & X-Axis Configuration
+1. **Automatic Type Detection:** Har ek column ka data type automatically detect hota hai:
+   * **Numeric Badge (Blue):** Numbers, integers aur decimals.
+   * **Date / Time Badge (Cyan):** Dates aur timestamps.
+   * **Text Badge (Orange):** Textual strings ya category columns.
+2. **Search Box:** Badi tables me column name search karke filter karein.
+3. **Select All Numeric / Clear:** Ek click me sabhi eligible numeric columns select ya unselect karein.
+4. **Reference X-Axis Selector:**
+   * Agar table me date/time column hai toh app use automatically X-Axis ke roop me select karti hai.
+   * User chahein toh manually kisi bhi date column ya default Row Index (1, 2, 3...) ko X-Axis bana sakte hain.
+5. **Missing Values Handling Strategy:**
+   * **Ignore:** Khali cells ko skip karta hai.
+   * **Treat as 0:** Khali cells ko 0.0 value assign karta hai.
+   * **Interpolate:** Previous aur next values ke beech mathematical linear interpolation karke curve ko smooth rakhta hai.
+
+#### Step 3: Interactive Trend Curves (Visualization)
+1. **Recharts-equivalent Native Charting:** `fl_chart` library ka use karke smooth curved bezier lines render hoti hain.
+2. **Chart Modes:**
+   * **Combined Mode:** Sabhi selected variables ek hi chart par alag-alag curated color curves me dikhte hain.
+   * **Individual Mode:** Ek specific variable ko isolate karke detailed deep-dive curve dikhata hai.
+3. **Touch Tooltip:** Chart par kisi bhi point par tap ya drag karne par exact Date/Index aur uski calculated numeric value ka tooltip popup aata hai.
+4. **Interactive Legend:** Neeche diye gaye variable badges par tap karke instant focus switch kar sakte hain.
+
+#### Step 4: Statistical Trend Summary
+Har ek selected numeric variable ke liye mathematically verified metrics calculate hote hain:
+* **Average (Mean):** Sabhi values ka mathematical average.
+* **Median:** Midpoint observation value.
+* **Min & Max:** Minimum aur maximum limits.
+* **First & Last Value:** Timeline ki pehli aur aakhri values.
+* **Difference & Percentage Change (%):** Overall growth ya drop percentage (Green / Red indicator).
+* **Trend Direction Badge:**
+  * 📈 **Increasing:** Positive upward growth.
+  * 📉 **Decreasing:** Downward decline.
+  * ➖ **Stable:** Balanced sideways trend.
+
+#### Step 5: Data Table & Multi-Sheet Excel Export (.xlsx)
+1. **Processed Data Table Preview:**
+   * Table me horizontal scroll aur pagination (15 rows per page) supported hai.
+   * Kisi bhi column header par tap karke Ascending/Descending sort karein.
+   * "Selected Only" filter toggle karke sirf selected columns dekhein.
+   * Search box se rows me search karein.
+2. **Export to Excel (.xlsx):**
+   * Prominent green button **"Export to Excel (.xlsx)"** dabayein.
+   * App automatically real multi-sheet workbook generate karti hai:
+     * **Sheet 1: Original Data:** PDF se extract hua complete raw data.
+     * **Sheet 2: Selected Variables:** Sirf user ke dwara chune gaye variables.
+     * **Sheet 3: Trend Data:** Reference X-Axis aur corresponding curve values.
+     * **Sheet 4: Summary:** Sabhi statistical metrics (Min, Max, Avg, First, Last, Direction, Valid observations, Missing count).
+   * File name standard format: `trend_analysis_YYYY-MM-DD_HH-mm.xlsx`.
+   * File create hote hi Android ka native **Share Sheet** khulta hai jisse aap file ko directly Microsoft Excel, Google Sheets, WhatsApp, Gmail, ya Device Files me save kar sakte hain!
 
 ---
 

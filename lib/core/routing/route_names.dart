@@ -12,6 +12,7 @@ class AppRouteNames {
 
   // Shell Tabs
   static const String dashboard = '/dashboard';
+  static const String pdfAnalyzer = '/pdf-analyzer';
   static const String trends = '/trends';
   static const String analytics = '/analytics';
   static const String activity = '/activity';

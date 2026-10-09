@@ -10,6 +10,7 @@ import '../../features/auth/otp_verification_screen.dart';
 import '../../features/auth/register_screen.dart';
 import '../../features/auth/reset_password_screen.dart';
 import '../../features/dashboard/dashboard_screen.dart';
+import '../../features/pdf_analyzer/pdf_analyzer_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/profile/edit_profile_screen.dart';
 import '../../features/profile/profile_screen.dart';
@@ -163,7 +164,17 @@ final routerProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
-          // Branch 1: Trends
+          // Branch 1: PDF Analyzer
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRouteNames.pdfAnalyzer,
+                builder: (context, state) => const PdfAnalyzerScreen(),
+              ),
+            ],
+          ),
+
+          // Branch 2: Trends
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -173,22 +184,12 @@ final routerProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
-          // Branch 2: Analytics
+          // Branch 3: Analytics
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: AppRouteNames.analytics,
                 builder: (context, state) => const AnalyticsScreen(),
-              ),
-            ],
-          ),
-
-          // Branch 3: Activity
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: AppRouteNames.activity,
-                builder: (context, state) => const ActivityScreen(),
               ),
             ],
           ),
@@ -203,6 +204,13 @@ final routerProvider = Provider<GoRouter>((ref) {
             ],
           ),
         ],
+      ),
+
+      // Activity Route
+      GoRoute(
+        path: AppRouteNames.activity,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const ActivityScreen(),
       ),
 
       // Global Features & Actions

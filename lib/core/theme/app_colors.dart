@@ -38,6 +38,9 @@ class AppColors {
   static const Color dangerLight = Color(0xFFF87171);
   static const Color dangerContainer = Color(0xFFFEE2E2);
   static const Color dangerContainerDark = Color(0xFF7F1D1D);
+  static const Color error = danger;
+  static const Color accent = secondary;
+  static const Color textSecondary = textSecondaryLight;
 
   static const Color info = Color(0xFF3B82F6);
   static const Color infoContainer = Color(0xFFDBEAFE);

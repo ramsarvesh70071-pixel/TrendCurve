@@ -33,6 +33,11 @@ class ResponsiveScaffold extends StatelessWidget {
         label: 'Dashboard',
       ),
       NavigationDestination(
+        icon: Icon(Icons.picture_as_pdf_outlined),
+        selectedIcon: Icon(Icons.picture_as_pdf_rounded),
+        label: 'PDF Analyzer',
+      ),
+      NavigationDestination(
         icon: Icon(Icons.show_chart_rounded),
         selectedIcon: Icon(Icons.show_chart_rounded),
         label: 'Trends',
@@ -41,11 +46,6 @@ class ResponsiveScaffold extends StatelessWidget {
         icon: Icon(Icons.analytics_outlined),
         selectedIcon: Icon(Icons.analytics_rounded),
         label: 'Analytics',
-      ),
-      NavigationDestination(
-        icon: Icon(Icons.history_rounded),
-        selectedIcon: Icon(Icons.history_rounded),
-        label: 'Activity',
       ),
       NavigationDestination(
         icon: Icon(Icons.person_outline_rounded),
@@ -97,6 +97,11 @@ class ResponsiveScaffold extends StatelessWidget {
                   label: Text('Dashboard'),
                 ),
                 NavigationRailDestination(
+                  icon: Icon(Icons.picture_as_pdf_outlined),
+                  selectedIcon: Icon(Icons.picture_as_pdf_rounded),
+                  label: Text('PDF Analyzer'),
+                ),
+                NavigationRailDestination(
                   icon: Icon(Icons.show_chart_rounded),
                   selectedIcon: Icon(Icons.show_chart_rounded),
                   label: Text('Trends'),
@@ -105,11 +110,6 @@ class ResponsiveScaffold extends StatelessWidget {
                   icon: Icon(Icons.analytics_outlined),
                   selectedIcon: Icon(Icons.analytics_rounded),
                   label: Text('Analytics'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.history_rounded),
-                  selectedIcon: Icon(Icons.history_rounded),
-                  label: Text('Activity'),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.person_outline_rounded),
